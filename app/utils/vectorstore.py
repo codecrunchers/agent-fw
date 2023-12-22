@@ -1,8 +1,13 @@
 from abc import ABC, abstractmethod
 import hashlib
+import logging
+
+from langchain.text_splitter import CharacterTextSplitter
 from app import config
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
+
+logger = logging.getLogger(__name__)
 
 
 # VStore factory
@@ -24,7 +29,10 @@ class AbstractVectorStore(ABC):
 
 
 class FAISSLocal(AbstractVectorStore):
-    def save(self, vs, uri):
+    def save(self, data, uri):
+        embeddings = OpenAIEmbeddings()
+        logger.debug(len(data))
+        vs = FAISS.from_documents(chunker(data), embeddings)
         vs.save_local(uri_to_hash_key(uri))
         return uri_to_hash_key(uri)
 
@@ -41,3 +49,10 @@ def uri_to_hash_key(uri):
     # Convert the hash object to a hexadecimal string
     hash_hex = hash_object.hexdigest()
     return hash_hex
+
+
+def chunker(documents):
+    text_splitter = CharacterTextSplitter(
+        chunk_size=1000, chunk_overlap=30, separator="\n"
+    )
+    return text_splitter.split_documents(documents=documents)

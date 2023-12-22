@@ -10,3 +10,6 @@ unstructured[all-docs] # TOO LARGE!
 pdf2image
 pdfminer.six
 faiss-cpu # -gpu for local with GPU
+tiktoken
+tesseract
+duckduckgo-search

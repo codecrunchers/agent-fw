@@ -1,9 +1,10 @@
+from enum import Enum
+from fastapi import File
 from langchain.document_loaders import UnstructuredPDFLoader
-from langchain.text_splitter import CharacterTextSplitter
 from abc import ABC, abstractmethod
 from app import config
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain.document_loaders.image import UnstructuredImageLoader
+import pathlib
 
 
 # File Parser factory
@@ -25,20 +26,31 @@ class AbstractFileLoader(ABC):
 
 
 class UnstructuredFileInterpreter:
+    class FileType(Enum):
+        PDF = 1
+        IMG = 2
+        JPG = 3
+        PNG = 4
+
     async def parse(self, uri):
-        loader = UnstructuredPDFLoader(uri)
+        if self.simple_file_type(uri) == UnstructuredFileInterpreter.FileType.PDF:
+            loader = UnstructuredPDFLoader(uri)
+        elif self.simple_file_type(uri) in UnstructuredFileInterpreter.FileType:
+            loader = UnstructuredImageLoader(uri)
+        else:
+            raise Exception("Unsupported file")
+
         self.documents = loader.load()
         self.key = uri
 
     async def process(self, uri, db):
+        """
+        Parses and saves the document to configured vectordb
+        """
         await self.parse(uri)
-        embeddings = OpenAIEmbeddings()
-        vs = FAISS.from_documents(chunker(self.documents), embeddings)
-        db.save(vs, uri)
+        db.save(self.documents, uri)
 
-
-async def chunker(documents):
-    text_splitter = CharacterTextSplitter(
-        chunk_size=1000, chunk_overlap=30, separator="\n"
-    )
-    return text_splitter.split_documents(documents=documents)
+    def simple_file_type(self, uri):
+        return UnstructuredFileInterpreter.FileType[
+            pathlib.Path(uri).suffix.strip(".").upper()
+        ]

@@ -1,3 +1,7 @@
 example-files filter=lfs diff=lfs merge=lfs -text
 Chinook.db filter=lfs diff=lfs merge=lfs -text
 Chinook_Sqlite.sql filter=lfs diff=lfs merge=lfs -text
+example-files/dictionary.pdf filter=lfs diff=lfs merge=lfs -text
+example-files/pport.jpg filter=lfs diff=lfs merge=lfs -text
+example-files/sample.pdf filter=lfs diff=lfs merge=lfs -text
+example-files/bank-statement.pdf filter=lfs diff=lfs merge=lfs -text

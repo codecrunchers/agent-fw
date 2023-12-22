@@ -28,4 +28,5 @@ class InMemConfig(AbstractConfig):
             "file_loader_type": "unstructured",
             "llm": "OpenAI",
             "vectorstore": "FAISSLOCAL",
+            "search": "DDG",
         }

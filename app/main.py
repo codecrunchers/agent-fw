@@ -1,28 +1,20 @@
-from langchain.prompts import PromptTemplate
+from latgchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-from app import langchain_llm, db_instance, files, vectorstore, app
+from app import langchain_llm, files, vectorstore, app
+from langchain.chains import RetrievalQA
 
 
-@app.post("/summarize-text")
-async def summarize_text(text: str):
-    summarize_template_string = """
-            Provide a summary for the following text:
-            {text}
-    """
+@app.get("/analyse")
+async def get_doc(uri, query):
+    response = await files.process(uri, vectorstore)
+    vstore = vectorstore.load(uri)
 
-    summarize_prompt = PromptTemplate(
-        template=summarize_template_string,
-        input_variables=["text"],
-    )
-    summarize_chain = LLMChain(
+#    search = search.search("")
+
+    qa = RetrievalQA.from_chain_type(
         llm=langchain_llm,
-        prompt=summarize_prompt,
+        chain_type="stuff",
+        retriever=vstore.as_retriever(),
     )
-    summary = summarize_chain.run(text=text)
-    return {"summary": summary}
-
-
-@app.get("/getdoc")
-async def get_doc(uri):
-    response = await files.process(vectorstore, uri)
-    return {"summary": response}
+    result = qa.run(query)
+    return {"summary": result}

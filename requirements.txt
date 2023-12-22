@@ -9,3 +9,4 @@ langchain-experimental==0.0.43
 unstructured[all-docs]
 pdf2image
 pdfminer.six
+faiss-cpu # -gpu for local with GPU

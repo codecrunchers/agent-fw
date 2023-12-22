@@ -1,14 +1,14 @@
 from abc import ABC, abstractmethod
-from langchain import OpenAI
+from langchain.llms import OpenAI
 from app import config
 
 
 # LLM factory
 def llm_factory():
-    if config["file_loader_type"] == "unstructured":
+    if config["llm"] == "OpenAI":
         return OpenAILLM()
     else:
-        raise ValueError("Unsupported database type")
+        raise ValueError("Unsupported FileLoader type")
 
 
 # Abstract base class for databases

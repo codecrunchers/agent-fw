@@ -26,4 +26,5 @@ class InMemConfig(AbstractConfig):
             "db_type": "dev",
             "db_uri": "sqlite:///Chinook.db",
             "file_loader_type": "unstructured",
+            "llm": "OpenAI",
         }

@@ -12,6 +12,9 @@ There's three steps to starting the demo or starting development with this templ
 
 ##  Run Local 
 
+
+## Test
+`pytest tests/your_test_file.py`
 ##  Access from Inscribe App
 
 ##  Features 

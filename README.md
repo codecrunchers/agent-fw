@@ -1,13 +1,6 @@
-# LLM-API-starterkit
+#  LLM-API-starterkit
 
-For a step-by-step guide and more context, please look at my blog post: https://blog.timleers.com/a-stupidly-minimal-llm-api-starterkit-deploy-llm-endpoints-in-a-minute-with-langchain-and-fastapi
-
-This repository is the most minimal implementation of an LLM API possible, focusing on making this technology accessible to coders new to LLMs & APIs. The core libraries are `langchain` & `fastapi`. 
-
-For an example that is more comprehensive and adhering to best practices, I will soon share more examples.
-  * Serverless LLM application deployment examples are currently being developed at https://github.com/tleers/serverless-llm-app-factory, extending the llm-api-starterkit to web deployment & alternative compute options
-
-# Quick-start
+##  Quick-start
 
 There's three steps to starting the demo or starting development with this template.
 
@@ -15,7 +8,34 @@ There's three steps to starting the demo or starting development with this templ
 2. Selection of LLM model & dependencies
 3. Running the FastAPI application
 
-## 1. Installation of dependencies
+##  API Keys
+
+##  Run Local 
+
+##  Access from Inscribe App
+
+##  Features 
+ - FAISS
+ - Unstructured PDF Parser
+ - SQL Agent
+ - OpenAI LLM 
+ - SageMaker Model
+ - Chat History
+ - Authentication
+ - Session managment
+ - Prompt Engineer
+
+##  Creating your own Model, chatBot or Agent
+
+
+##  Production
+
+
+
+
+
+
+## # 1. Installation of dependencies
 
 We use the most common way of installing dependencies, which is using `pip install` with a requirements.txt.
 
@@ -34,20 +54,20 @@ pip install -r requirements.txt
 
 Ideally, we use dependency management with `poetry` for a smoother experience (see [https://github.com/tleers/minimal-serverless-llm-deployment](https://github.com/tleers/serverless-llm-app-factory) for an example). We ignore this additional complexity for now in this example.
 
-## 2. LLM model preparation
+## # 2. LLM model preparation
 
-### 2.1 **With an OpenAI key**
+## ## 2.1 **With an OpenAI key**
 
 1. Change the filename of .env.example to .env
 2. Add your OpenAI API key to .env
 
 Done.
 
-### 2.2 **Without an OpenAI key**
+## ## 2.2 **Without an OpenAI key**
 
 Note that you need sufficiently powerful hardware to run a local model. It's easier to use the OpenAI API if you're initially experimenting. Making an account means you get free credits, which are usually more than you need.
 
-#### **X86-64 architectures (Windows, Linux, non-Apple silicon Mac)**
+## ### **X86-64 architectures (Windows, Linux, non-Apple silicon Mac)**
 We use LlamaCpp. 
 https://python.langchain.com/en/latest/modules/models/llms/integrations/llamacpp.html
 
@@ -57,7 +77,7 @@ I use vicuna 1.1 quantized https://huggingface.co/vicuna/ggml-vicuna-7b-1.1/blob
 2. Make sure the model weights are in the current directory and you know the filename. 
 In this tutorial, the filename is `ggml-vic7b-uncensored-q4_0.bins`
 
-#### **ARM64 architectures or M1/M2 Mac**
+## ### **ARM64 architectures or M1/M2 Mac**
 LangChain support for LLamaCpp is currently iffy on Apple Silicon. Therefore, we instead use the GPT4ALL integration.
 Download the model file here:
 
@@ -70,7 +90,7 @@ There are many different ones available, take a look at what best fits your usec
 In this tutorial, the filename is `ggml-gpt4all-j-v1.3-groovy.bin`
 
 
-## 3. Running the FastAPI application
+## # 3. Running the FastAPI application
 
 You should be ready to run the most basic example.
 

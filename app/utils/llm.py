@@ -1,10 +1,10 @@
+from abc import ABC, abstractmethod
 from langchain import OpenAI
-from app.utils.config import get_environment_config
+from app import config
 
 
 # LLM factory
 def llm_factory():
-    config = get_environment_config()
     if config["file_loader_type"] == "unstructured":
         return OpenAILLM()
     else:

@@ -1,11 +1,10 @@
 from langchain.document_loaders import UnstructuredPDFLoader
-from app.utils.config import get_environment_config
 from abc import ABC, abstractmethod
+from app import config
 
 
 # Database factory
 def file_loader_factory():
-    config = get_environment_config()
     if config["file_loader_type"] == "unstructured":
         return UnstructuredFileInterpreter()
     else:

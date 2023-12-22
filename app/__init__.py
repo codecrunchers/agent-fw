@@ -1,5 +1,8 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.utils.config import config_factory
 
+# Leave me here
 config = config_factory().get()
 
 from app.utils.vectorstore import vectorstore_factory
@@ -12,3 +15,13 @@ db_instance.connect()
 langchain_llm = llm_factory().llm()
 files = file_loader_factory()
 vectorstore = vectorstore_factory()
+
+
+# FASTAPI
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)

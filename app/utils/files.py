@@ -20,11 +20,7 @@ class AbstractFileLoader(ABC):
         pass
 
     @abstractmethod
-    async def persist(self, db):
-        pass
-
-    @abstractmethod
-    async def retrieve(self, db):
+    def process(self):
         pass
 
 
@@ -34,20 +30,11 @@ class UnstructuredFileInterpreter:
         self.documents = loader.load()
         self.key = uri
 
-    # TODO: Embedding Abstraction
-    async def persist(self, db):
-        docs = chunker(self.documents)
-        # Create vectors
-        self.get_vectorstore(docs).save_local(uri_to_hash_key(self.key))
-
-    async def retrieve(self, db):
+    async def process(self, uri, db):
+        await self.parse(uri)
         embeddings = OpenAIEmbeddings()
-        persisted_vectorstore = FAISS.load_local(uri_to_hash_key(self.key), embeddings)
-        return persisted_vectorstore
-
-    async def get_vectorstore(self, chunks):
-        embeddings = OpenAIEmbeddings()
-        return FAISS.from_documents(chunks, embeddings)
+        vs = FAISS.from_documents(chunker(self.documents), embeddings)
+        db.save(vs, uri)
 
 
 async def chunker(documents):
@@ -55,5 +42,3 @@ async def chunker(documents):
         chunk_size=1000, chunk_overlap=30, separator="\n"
     )
     return text_splitter.split_documents(documents=documents)
-
-

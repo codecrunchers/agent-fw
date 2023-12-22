@@ -20,7 +20,7 @@ class AbstractDatabase(ABC):
         pass
 
     @abstractmethod
-    def query(self, query):
+    async def query(self, query):
         pass
 
 
@@ -30,5 +30,5 @@ class LocalDatabase(AbstractDatabase):
         llm = OpenAI(temperature=0, verbose=True)
         self.db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
 
-    def query(self, query: str):
+    async def query(self, query: str):
         return self.db_chain.run(query)

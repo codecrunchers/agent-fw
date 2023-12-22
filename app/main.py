@@ -13,9 +13,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# LANGCHAIN
-# langchain_llm = LLM
-
 summarize_template_string = """
         Provide a summary for the following text:
         {text}
@@ -40,7 +37,7 @@ async def summarize_text(text: str):
 
 @app.get("/query-db")
 async def query_db(text: str):
-    response = db_instance.query(text)
+    response = await db_instance.query(text)
     return {"summary": response}
 
 

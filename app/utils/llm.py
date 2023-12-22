@@ -8,10 +8,9 @@ def llm_factory():
     if config["llm"] == "OpenAI":
         return OpenAILLM()
     else:
-        raise ValueError("Unsupported FileLoader type")
+        raise ValueError("Unsupported LLM")
 
 
-# Abstract base class for databases
 class AbstractLLM(ABC):
     @abstractmethod
     def llm(self):

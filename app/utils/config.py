@@ -27,4 +27,5 @@ class InMemConfig(AbstractConfig):
             "db_uri": "sqlite:///Chinook.db",
             "file_loader_type": "unstructured",
             "llm": "OpenAI",
+            "vectorstore": "FAISSLOCAL",
         }

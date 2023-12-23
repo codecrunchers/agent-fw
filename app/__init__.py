@@ -4,7 +4,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.utils.config import config_factory
 
 import logging
-from app.utils.searchengine import search_factory
+# Removed import of search_factory, will use getter function
+
+# Getter function for search_factory to avoid circular import
+def get_search_factory():
+    from app.utils.searchengine import search_factory
+    return search_factory
 
 # Leave me here
 config = config_factory().get()
@@ -14,7 +19,7 @@ from app.utils.db import database_factory
 from app.utils.files import file_loader_factory
 from app.utils.llm import llm_factory
 
-search = search_factory()
+search = get_search_factory()()
 db_instance = database_factory()
 db_instance.connect()
 langchain_llm = llm_factory().llm()

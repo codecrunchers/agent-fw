@@ -177,3 +177,13 @@ You can also try out the summarization endpoint by clicking `Try it out!`
 
 ![Showing FastAPI with the Try it out button](docs/try_it_out.png)
 
+## Additional Information
+
+In this section, we offer more insights, tips, and potential fixes that might be helpful during your experience with the LLM-API-starterkit. If you encounter common issues, you can refer to the following resources or this section for solutions.
+
+- **Tips and Tricks**: Get acquainted with the features of langchain to fully utilize its capabilities with LLMs.
+- **Common Issues and Solutions**: Check the GitHub issues tab for troubleshooting common problems that other users have faced.
+- **Relevant Resources**: Visit the official documentation pages of the tools utilized in this framework, such as FastAPI, OpenAI, and langchain, to gain deeper knowledge and best practices.
+
+More information will be added to this section as the project evolves and more feedback is gathered from users.
+

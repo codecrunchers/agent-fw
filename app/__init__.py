@@ -32,7 +32,7 @@ db_instance.connect()
 langchain_llm = llm_factory().llm()
 files = file_loader_factory()
 vectorstore = vectorstore_factory()
-prompt = prompt_factory().generate()
+prompt = prompt_factory()
 memory = memory_factory()
 
 # FASTAPI
@@ -46,53 +46,24 @@ app.add_middleware(
 )
 
 
-class CaptureResponse(Response):
-    def __init__(self, content: None, **kwargs):
-        super().__init__(content, **kwargs)
-        self.original_body = content
-
-    async def body_iterator(self):
-        if isinstance(self.original_body, bytes):
-            yield self.original_body
-        elif asyncio.iscoroutine(self.original_body):
-            yield await self.original_body
-        else:
-            yield self.original_body.encode(self.charset)
-
-
-class MemoryMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request: Request, call_next):
-        response = await call_next(request)
-        # Capture the response body
-        captured_response = CaptureResponse(content=response)
-        body = captured_response.original_body
-
-        # Do something with the body, like logging it
-        print("Response Body:", body.decode(response.charset))
-
-        memory.save(request.state.session_id, request.query_params["query"], body)
-        # Code to run after each request
-
-        # Return the original response
-        return response
-
-
 class SessionMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+        # Check if a session ID is already set
         session_id = request.cookies.get("session_id")
         if not session_id:
+            # Generate a new session ID
             session_id = secrets.token_urlsafe()
             request.state.session_id = session_id
             response = await call_next(request)
             response.set_cookie(key="session_id", value=session_id)
             return response
         else:
+            # Use the existing session ID
             request.state.session_id = session_id
             return await call_next(request)
 
 
 app.add_middleware(SessionMiddleware)
-app.add_middleware(MemoryMiddleware)
 
 
 def get_session_id(request: Request):

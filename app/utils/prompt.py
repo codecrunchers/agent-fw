@@ -1,6 +1,11 @@
 from abc import ABC, abstractmethod
-from langchain_core.prompts import PromptTemplate
 from app import config
+from langchain.prompts import (
+    ChatPromptTemplate,
+    MessagesPlaceholder,
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+)
 
 
 # prompt factory
@@ -23,12 +28,19 @@ class StringPrompt(AbstractPrompt):
     Previous conversation:
     {chat_history}
 
-    New human question: {question}
+    New Fraud Analyst question: {question}
     Response:"""
 
     def __init__(self, prompt=None):
         self.prompt_template = self.template
 
     def generate(self):
-        prompt = PromptTemplate.from_template(self.prompt_template)
+        prompt = ChatPromptTemplate.from_messages(
+            messages=[
+                SystemMessagePromptTemplate.from_template(self.prompt_template),
+                MessagesPlaceholder(variable_name="chat_history"),
+                HumanMessagePromptTemplate.from_template("{question}"),
+            ]
+        )
+
         return prompt

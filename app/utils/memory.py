@@ -23,9 +23,10 @@ class AbstractMemory(ABC):
 
 class InMemMemory(AbstractMemory):
     def save(self, session_id, user, ai):
-        memory = ConversationBufferMemory(memory_key=session_id)
-        memory.chat_memory.add_user_message(user)
-        memory.chat_memory.add_ai_message(ai)
+        self.memory = ConversationBufferMemory(memory_key="chat_history")
+        self.memory.chat_memory.add_user_message(user)
+        if ai:
+            self.memory.chat_memory.add_ai_message(ai)
 
     def load(self, session_id):
-        pass
+        return ConversationBufferMemory(memory_key="chat_history", return_messages=True)

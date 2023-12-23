@@ -154,27 +154,12 @@ To run the application using the OpenAI API, follow these steps:
 
 2. Run the following command in the terminal from the root directory of the project:
 ```bash
-uvicorn app.main_openai:app --port 80 --env-file .env
+uvicorn app.main:app --port 80 --env-file .env
 ```
 
 3. Open a web browser and navigate to `http://localhost:80/docs` to view the automatically generated API documentation courtesy of FastAPI and Swagger UI. Here, you have an interactive UI to send requests to the API and observe the responses.
 
 4. Use the interactive API documentation to send requests to your LLM API. To do this, click on the endpoint you wish to test, then click 'Try it out', enter your request data, and finally hit the 'Execute' button to run the query and see the response.
-
-With local LLM using Vicuna, compatible with X86_64 architecture
-```bash
-uvicorn app.main_local_lamacpp:app --port 80
-```
-
-With local LLM using GPT4All, compatible with X86_64 as well as arch_64 (mac m1, m2) architectures.
-```bash
-uvicorn app.main_local_gpt_4_all:app --port 80
-```
-
-Go to `https://localhost:80/docs` to see the automatically generated API documentation. 
-
-You can also try out the summarization endpoint by clicking `Try it out!`
-
 ![Showing FastAPI with the Try it out button](docs/try_it_out.png)
 
 ## Additional Information
@@ -182,8 +167,4 @@ You can also try out the summarization endpoint by clicking `Try it out!`
 In this section, we offer more insights, tips, and potential fixes that might be helpful during your experience with the LLM-API-starterkit. If you encounter common issues, you can refer to the following resources or this section for solutions.
 
 - **Tips and Tricks**: Get acquainted with the features of langchain to fully utilize its capabilities with LLMs.
-- **Common Issues and Solutions**: Check the GitHub issues tab for troubleshooting common problems that other users have faced.
-- **Relevant Resources**: Visit the official documentation pages of the tools utilized in this framework, such as FastAPI, OpenAI, and langchain, to gain deeper knowledge and best practices.
-
-More information will be added to this section as the project evolves and more feedback is gathered from users.
 

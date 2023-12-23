@@ -1,6 +1,6 @@
 from enum import Enum
 from fastapi import File
-from langchain.document_loaders import UnstructuredPDFLoader
+from langchain.document_loaders import UnstructuredFileIOLoader, UnstructuredPDFLoader
 from abc import ABC, abstractmethod
 from app import config
 from langchain.document_loaders.image import UnstructuredImageLoader
@@ -21,7 +21,11 @@ class AbstractFileLoader(ABC):
         pass
 
     @abstractmethod
-    def process(self):
+    def process(self, uri, db):
+        pass
+
+    @abstractmethod
+    def process_upload(self, file, db):
         pass
 
 
@@ -54,3 +58,11 @@ class UnstructuredFileInterpreter:
         return UnstructuredFileInterpreter.FileType[
             pathlib.Path(uri).suffix.strip(".").upper()
         ]
+
+    async def process_upload(self, file, db):
+        loader = UnstructuredFileIOLoader(file)
+
+        documents = loader.load()
+        db.save(documents, "key")
+
+        self.key = ""

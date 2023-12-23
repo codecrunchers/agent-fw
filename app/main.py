@@ -1,17 +1,17 @@
-from fastapi import File, Request
+from fastapi import File, Request, UploadFile
 from langchain.chains import LLMChain
-from app import (
-    langchain_llm,
-    app,
-    prompt,
-)
+from langchain.memory import vectorstore
+from app import langchain_llm, app, prompt, files, vectorstore, logger
 
 
 @app.post("/upload")
-def get_file(file: bytes = File(...)):
-    content = file.decode("utf-8")
-    lines = content.split("\n")
-    return {"content": lines}
+async def upload(file: bytes = File(...)):
+    import io
+
+    logger.debug(f"Processing {file}")
+    f = io.BytesIO(file)
+    await files.process_upload(f, vectorstore)
+    return {"summary": "File proecessed"}
 
 
 @app.get("/analyse/{query}")

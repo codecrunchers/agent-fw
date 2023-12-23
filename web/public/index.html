@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Interface</title>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <div id="chat">
+        <textarea id="messages" readonly></textarea>
+        <form id="message-form">
+            <input type="text" id="message-input">
+            <input type="submit" value="Send">
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('file-uploaded', () => {
+            // Start chat session
+        });
+
+        document.getElementById('message-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const message = document.getElementById('message-input').value;
+            socket.emit('message', message);
+            document.getElementById('message-input').value = '';
+        });
+
+        socket.on('message', (message) => {
+            const messages = document.getElementById('messages');
+            messages.value += `\n${message}`;
+        });
+    </script>
+</body>
+</html>

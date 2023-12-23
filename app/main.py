@@ -8,7 +8,6 @@ from app import langchain_llm, app, prompt, files, vectorstore, logger
 async def upload(file: bytes = File(...)):
     import io
 
-    logger.debug(f"Processing {file}")
     f = io.BytesIO(file)
     await files.process_upload(f, vectorstore)
     return {"summary": "File proecessed"}

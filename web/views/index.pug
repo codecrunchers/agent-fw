@@ -49,3 +49,7 @@ html
             socket.on('chatter', function(message) {
                 $('#chat-messages').append($('<li>').text(message));
              });
+
+            socket.on('chitter', function(message) {
+                $('#chat-messages').append($('<li>').text(message));
+             });

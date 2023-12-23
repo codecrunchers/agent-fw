@@ -37,12 +37,11 @@ app.post('/upload', upload.single('file'), (req, res) => {
         headers: form.getHeaders()
     });
     form.pipe(request);
-    request.on('response', function (res) {
-        console.log(res.statusCode);
+    request.on('response', function (response) {
+        console.log(response.statusCode);
+        res.json({"summary": "file uploaded"});
     });
 
-    console.log(request);
-    res.render('index')
 
 });
 

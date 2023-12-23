@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body: formData
         })
             .then(() => {
-                console.log('File uploaded successfully');
+                $('#chat-messages').append($('<li>').text("File loaded"));
             })
             .catch(() => {
                 console.error('Error uploading file');

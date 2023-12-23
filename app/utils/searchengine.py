@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 from langchain.tools import DuckDuckGoSearchRun
-from app import config
+# Moved config import inside search_factory
 
 
 # search factory
 def search_factory():
+    from app import config
     if config["search"] == "DDG":
         return DDGSearch()
     else:

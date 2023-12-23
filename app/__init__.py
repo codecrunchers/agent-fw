@@ -60,7 +60,16 @@ class SessionMiddleware(BaseHTTPMiddleware):
         else:
             # Use the existing session ID
             request.state.session_id = session_id
-            return await call_next(request)
+            request.state.mem = memory.load(session_id)
+            response = await call_next(request)
+            import pdb
+
+            #pdb.set_trace()
+            if request.query_params.__contains__("query"):
+                memory.save(
+                    session_id, request.query_params.__getitem__("query"), response.body
+                )
+            return response
 
 
 app.add_middleware(SessionMiddleware)

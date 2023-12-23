@@ -36,10 +36,11 @@ async def get_doc(request: Request, query, uri):
     #    retriever=vstore.as_retriever(),
     # )
     # result = qa.run(query)
-    mem = memory.load(get_session_id(request))
+    # mem = memory.load(get_session_id(request))
     _prompt = prompt.generate()
-    conversation = LLMChain(llm=langchain_llm, prompt=_prompt, verbose=True, memory=mem)
+    conversation = LLMChain(
+        llm=langchain_llm, prompt=_prompt, verbose=True, memory=request.state.mem
+    )
     response = conversation({"question": query})
-    logger.debug(response["text"])
-    memory.save(get_session_id(request), query, response["text"])
+    # memory.save(get_session_id(request), query, response["text"])
     return {"summary": response["text"]}

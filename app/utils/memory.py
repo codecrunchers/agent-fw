@@ -7,8 +7,6 @@ from app import config, vectorstore_factory
 def memory_factory():
     if config["memory"] == "in_mem":
         return InMemMemory()
-    if config["memory"] == "local":
-        return OnDiskLocalMemory()
     else:
         raise ValueError("Unsupported memory")
 
@@ -38,15 +36,3 @@ class InMemMemory(AbstractMemory):
 
     def load(self, session_id):
         return self.memory
-
-
-class OnDiskLocalMemory(AbstractMemory):
-    def save(self, session_id, user, ai):
-        self.memory = ConversationBufferMemory(memory_key="chat_history")
-        self.memory.chat_memory.add_user_message(user)
-        if ai:
-            self.memory.chat_memory.add_ai_message(ai)
-        vectorstore_factory().save(self.memory, session_id)
-
-    def load(self, session_id):
-        return ConversationBufferMemory(memory_key="chat_history", return_messages=True)

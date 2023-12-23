@@ -8,9 +8,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="agent-fw",
-    version="0.0.1",
-    author="Your Name",
-    description="A FastAPI application for language model",
+    version="0.0.2",
+    author="The Project's Team",
+    description="A FastAPI application for language model with integrated vector store and retrieval-based QA",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),

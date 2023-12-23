@@ -25,7 +25,26 @@ app.get('/', (req, res) => {
 
 io.on('connection', function (socket) {
     socket.on('chatter', function (message) {
-        console.log('message : ' + message);
+        const http = require('http');
+        http.get('http://localhost:8080/analyse/' + message, (resp) => {
+            let data = '';
+            // A chunk of data has been received.
+            resp.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            // The whole response has been received. Print out the result.
+            var jsonObject
+            resp.on('end', () => {
+                var jsonObject = JSON.parse(data);
+                console.log(jsonObject.summary);
+                io.emit('chatter', jsonObject.summary)
+            });
+
+
+        }).on("error", (err) => {
+            console.log("Error: " + err.message);
+        });
     });
 });
 

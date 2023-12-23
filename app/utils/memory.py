@@ -30,9 +30,9 @@ class InMemMemory(AbstractMemory):
         )
 
     def save(self, session_id, user, ai):
-        self.memory.chat_memory.add_user_message(user)
+        self.memory.chat_memory.add_user_message(user.strip())
         if ai:
-            self.memory.chat_memory.add_ai_message(ai)
+            self.memory.chat_memory.add_ai_message(ai.strip())
 
     def load(self, session_id):
         return self.memory

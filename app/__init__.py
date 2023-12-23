@@ -53,23 +53,17 @@ class SessionMiddleware(BaseHTTPMiddleware):
         if not session_id:
             # Generate a new session ID
             session_id = secrets.token_urlsafe()
-            request.state.session_id = session_id
-            response = await call_next(request)
-            response.set_cookie(key="session_id", value=session_id)
-            return response
-        else:
-            # Use the existing session ID
-            request.state.session_id = session_id
-            request.state.mem = memory.load(session_id)
-            response = await call_next(request)
-            import pdb
 
-            #pdb.set_trace()
-            if request.query_params.__contains__("query"):
-                memory.save(
-                    session_id, request.query_params.__getitem__("query"), response.body
-                )
-            return response
+        request.state.mem = memory.load(session_id)
+        request.state.session_id = session_id
+        response = await call_next(request)
+        response.set_cookie(key="session_id", value=session_id)
+        if request.query_params.__contains__("query"):
+            memory.save(
+                session_id, request.query_params.__getitem__("query"), response.body
+            )
+
+        return response
 
 
 app.add_middleware(SessionMiddleware)

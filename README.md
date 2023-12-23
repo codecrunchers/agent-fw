@@ -90,10 +90,29 @@ Ideally, we use dependency management with `poetry` for a smoother experience (s
 
 ## # 2. LLM model preparation
 
+LLM stands for Large Language Model, which is an advanced Artificial Intelligence model capable of understanding and generating natural language. LLMs are essential for a variety of Natural Language Processing (NLP) tasks such as translation, question-answering, and conversation simulations. In the context of our deployment framework, we use LLMs to process and interact with user inputs, providing intelligent and contextually relevant responses.
+
+Before using an LLM, you must ensure the model is properly set up with the necessary API keys and configurations. This typically involves the following steps:
+
 ## ## 2.1 **With an OpenAI key**
 
-1. Change the filename of .env.example to .env
-2. Add your OpenAI API key to .env
+1. Rename the `.env.example` file to `.env`. This can be done with the following command on UNIX-based systems (including Linux and macOS):
+```bash
+mv .env.example .env
+```
+On Windows, you can use:
+```cmd
+rename .env.example .env
+```
+
+2. Open the newly renamed `.env` file in a text editor of your choice.
+
+3. Locate the line that reads `OPENAI_API_KEY=` and add your OpenAI API key immediately after the equals sign so that it looks like this:
+```plaintext
+OPENAI_API_KEY=your_api_key_here
+```
+
+The `.env` file is used to store environment variables, which are a set of dynamic named values that can affect the way running processes will behave on a computer. In this case, it is being used to securely store the API key which is sensitive information and should not be hard-coded or checked into version control systems. Adding your OpenAI API key to the `.env` file allows the application to authenticate with the OpenAI API and use the LLM for processing requests.`
 
 Done.
 

@@ -29,4 +29,6 @@ class InMemConfig(AbstractConfig):
             "llm": "OpenAI",
             "vectorstore": "FAISSLOCAL",
             "search": "DDG",
+            "prompt": "string",
+            "memory": "in_mem",
         }

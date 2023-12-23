@@ -4,6 +4,6 @@ COPY package*.json ./
 RUN yarn add express pug socket.io 
 RUN npm install
 COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
+EXPOSE 5555
+CMD ["yarn", "start"]
 

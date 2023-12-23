@@ -145,12 +145,21 @@ In this tutorial, the filename is `ggml-gpt4all-j-v1.3-groovy.bin`
 
 ## # 3. Running the FastAPI application
 
-You should be ready to run the most basic example.
+FastAPI is a modern, high-performance web framework for building APIs with Python 3.7+ based on standard Python type hints. It's known for its speed, ease of use, and ability to create RESTful APIs quickly with automatic interactive documentation. FastAPI is particularly suited for this Light Language Model (LLM) API as it supports asynchronous request handling and is designed for scalability, making it a good choice for machine learning applications where concurrent handling of multiple requests is commonplace.
 
-With OpenAI API
+The OpenAI API provides access to OpenAI's powerful language models, including GPT-3 and others. By interacting with this API, users can perform natural language tasks such as completion, translation, summarization, and question-answering. Its strength lies in its ability to generate human-like text and understand complex queries.
+
+To run the application using the OpenAI API, follow these steps:
+1. Make sure you have created and activated your virtual environment (as described in the installation section) and that the `.env` file contains your OpenAI API key.
+
+2. Run the following command in the terminal from the root directory of the project:
 ```bash
 uvicorn app.main_openai:app --port 80 --env-file .env
 ```
+
+3. Open a web browser and navigate to `http://localhost:80/docs` to view the automatically generated API documentation courtesy of FastAPI and Swagger UI. Here, you have an interactive UI to send requests to the API and observe the responses.
+
+4. Use the interactive API documentation to send requests to your LLM API. To do this, click on the endpoint you wish to test, then click 'Try it out', enter your request data, and finally hit the 'Execute' button to run the query and see the response.
 
 With local LLM using Vicuna, compatible with X86_64 architecture
 ```bash

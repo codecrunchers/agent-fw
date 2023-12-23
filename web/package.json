@@ -1,0 +1,16 @@
+{
+    "name": "web",
+    "version": "1.0.0",
+    "description": "Web Chat",
+    "main": "app.js",
+    "author": "IAI",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.18.2",
+        "pug": "^3.0.2",
+        "socket.io": "^4.7.2"
+    },
+    "scripts": {
+        "start": "node app.js"
+    }
+}

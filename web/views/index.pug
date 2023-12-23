@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    title Riskee AI Example
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css')
+    link(rel='stylesheet', href='css/main.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  body
+    #chat-app
+      #chat.has-text-centered
+        section.hero.is-success
+          .hero-body
+            .container
+              h1.title Riskee
+              h2 Riskee Risk Assitant
+        section.section.chat-container
+          .container
+            .columns
+              .box.column.is-8.is-offset-2
+                h2.title Riskee chat
+                .chat-messages.has-text-left
+                  ul#chat-messages
+                form
+                  .field.has-addons
+                    p.control
+                      input(type='text', class='input', value='Chuck Norris', id='name')
+                    p.control.is-expanded
+                      input(type='text', class='input', placeholder='Try to say something', id='message')
+                    p.control
+                      input(type='submit', class='button is-success', value='Post')
+        footer
+          .container
+            .content
+              p
+                | Powered by
+                a(href='https://dev.com') CAI
+        script.
+            const socket = io();
+            $('form').submit(function() {
+                const name = $('#name').val();
+                const message = $('#message').val();
+                socket.emit('chatter', `${name} : ${message}`);
+                $('#message').val('');
+                return false;
+            });

@@ -30,5 +30,5 @@ class InMemConfig(AbstractConfig):
             "vectorstore": "FAISSLOCAL",
             "search": "DDG",
             "prompt": "string",
-            "memory": "in_mem",
+            "memory": "local",
         }

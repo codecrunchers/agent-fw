@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from langchain.memory import ConversationBufferMemory
-from app import config
+from app import config, vectorstore_factory
 
 
 # memory factory
@@ -46,6 +46,7 @@ class OnDiskLocalMemory(AbstractMemory):
         self.memory.chat_memory.add_user_message(user)
         if ai:
             self.memory.chat_memory.add_ai_message(ai)
+        vectorstore_factory().save(self.memory, session_id)
 
     def load(self, session_id):
         return ConversationBufferMemory(memory_key="chat_history", return_messages=True)

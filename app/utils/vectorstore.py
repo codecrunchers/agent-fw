@@ -31,7 +31,6 @@ class AbstractVectorStore(ABC):
 class FAISSLocal(AbstractVectorStore):
     def save(self, data, uri):
         embeddings = OpenAIEmbeddings()
-        logger.debug(len(data))
         vs = FAISS.from_documents(chunker(data), embeddings)
         vs.save_local(uri_to_hash_key(uri))
         return uri_to_hash_key(uri)

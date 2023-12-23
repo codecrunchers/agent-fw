@@ -42,7 +42,11 @@ There's three steps to starting the demo or starting development with this templ
 
 ## # 1. Installation of dependencies
 
-We use the most common way of installing dependencies, which is using `pip install` with a requirements.txt.
+Installing dependencies in a Python project is typically done using the `pip install` command along with a requirements.txt file. This file contains a list of packages needed for the project, specifying versions to ensure compatibility.
+
+It is highly recommended to install these dependencies within a virtual environment. A virtual environment is an isolated Python runtime environment that allows you to manage dependencies for different projects separately without running into version conflicts. It's one of the best practices in Python development because it helps maintain your system's integrity and ensures reproducible builds.
+
+To set up a virtual environment and install the required packages, follow these steps:
 
 Tutorial was created using `Python 3.10`.
 
@@ -50,7 +54,32 @@ Tutorial was created using `Python 3.10`.
 pip install -r requirements.txt
 ```
 
-It is advised to install these requirements in a virtual environment. To create a virtual environment and install the requirements there, use the following:
+1. Install the `virtualenv` package globally (if not already installed):
+```bash
+pip install virtualenv
+```
+
+2. Navigate to the project directory where you want to create the virtual environment.
+
+3. Create a virtual environment named 'venv' (you can choose any name):
+```bash
+python3 -m venv venv
+```
+
+4. Activate the virtual environment:
+On macOS and Linux:
+```bash
+source venv/bin/activate
+```
+On Windows:
+```bash
+call venv\Scripts\activate
+```
+
+5. With the virtual environment activated, install the dependencies from requirements.txt:
+```bash
+pip install -r requirements.txt
+```
 ```bash
 python3 -m venv venv
 . venv/bin/activate

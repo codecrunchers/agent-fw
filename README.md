@@ -1,5 +1,7 @@
 #  LLM-API-starterkit
 
+This repository serves as a lightweight beta model deployment framework designed to facilitate easy and efficient deployment of machine learning models. It provides wrapped access to features such as chat history, databases, sessions, authentication, an LLM (Large Language Model), and a file parsing model. Developed with a focus on agility and integrability, the framework works out of the box with an OpenAI key and integrates seamlessly with langchain, allowing for rapid enhancements with new GPTs and LLMs. Whether you are looking to deploy a model quickly or build a custom solution with various utilities, this framework offers a solid starting point.
+
 ##  Quick-start
 
 There's three steps to starting the demo or starting development with this template.

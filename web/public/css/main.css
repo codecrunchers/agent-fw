@@ -1,13 +1,18 @@
 body {
     font-family: Avenir, Helvetica, Arial, sans-serif;
-}form {
+}
+form {
     margin-top: 12px;
 }#chat-messages li {
     padding: 12px;
 }
 .upload-area {
-    border: 2px dashed #ccc;
+    border: 2px dashed #fdf374;
     padding: 20px;
     text-align: center;
     margin: 10px;
+}
+
+.container {
+    color:#fdf374;
 }

@@ -1,8 +1,14 @@
-from fastapi import File, Request, UploadFile
+from fastapi import File, Request
 from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
-from langchain.chains.loading import _load_qa_with_sources_chain
 from langchain.memory import vectorstore
-from app import langchain_llm, app, prompt, files, vectorstore, logger, memory
+from app import (
+    langchain_llm,
+    app,
+    prompt,
+    files,
+    vectorstore,
+    db_instance,
+)
 import io
 
 
@@ -20,17 +26,17 @@ async def analyse(request: Request, query):
         vstore = vectorstore.load("key")
     except:
         return {"summary": "Please upload a doument, drag it onto me"}
-    chat = ConversationalRetrievalChain.from_llm(
-        langchain_llm,
-        vstore.as_retriever(),
-        memory=memory.load(request.state.session_id),
-        verbose=True,
-        combine_docs_chain_kwargs={"prompt": _prompt},
+
+    full_chain = (
+        {
+            "source1": {"question": lambda x: x["question"]}
+            | db_instance.db()
+            | db_instance.db().run,
+            "source2": (lambda x: x["question"]) | vstore.as_retriever(),
+            "question": lambda x: x["question"],
+        }
+        | _prompt
+        | langchain_llm
     )
-
-    answer = chat({"question": query})["answer"]
-
-    #    import pdb
-
-    #    pdb.set_trace()
-    return {"summary": answer}
+    response = full_chain.invoke({"query": query, "question": query})
+    return {"summary": response}

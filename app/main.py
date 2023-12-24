@@ -17,14 +17,17 @@ async def upload(file: bytes = File(...)):
 async def analyse(request: Request, query):
     _prompt = prompt.generate()
     vstore = vectorstore.load("key")
-    qa = RetrievalQA.from_chain_type(
-        llm=langchain_llm,
-        chain_type="stuff",
-        retriever=vstore.as_retriever(),
+    chat = ConversationalRetrievalChain.from_llm(
+        langchain_llm,
+        vstore.as_retriever(),
         memory=memory.load(request.state.session_id),
+        verbose=True,
+        combine_docs_chain_kwargs={"prompt": _prompt},
     )
-    response = qa.run(query)
+
+    answer = chat({"question": query})["answer"]
+
     #    import pdb
 
     #    pdb.set_trace()
-    return {"summary": response}
+    return {"summary": answer}

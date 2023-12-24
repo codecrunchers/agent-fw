@@ -23,13 +23,13 @@ class AbstractPrompt(ABC):
 
 
 class StringPrompt(AbstractPrompt):
-    template = """You are a document fraud expert reasoning about the legitimacy of a document and the owner having conversation with a fraud analyst.
+    template = """You are a document fraud expert reasoning about the legitimacy of a document and the owner having conversation with a fraud analyst. \
+            ---- \
+            {context}\
+            ---- \
+            """
 
-    Previous conversation:
-    {chat_history}
-
-    New Fraud Analyst question: {question}
-    Response:"""
+    general_user_template = "Question:```{question}```"
 
     def __init__(self, prompt=None):
         self.prompt_template = self.template
@@ -38,8 +38,8 @@ class StringPrompt(AbstractPrompt):
         prompt = ChatPromptTemplate.from_messages(
             messages=[
                 SystemMessagePromptTemplate.from_template(self.prompt_template),
-                MessagesPlaceholder(variable_name="chat_history"),
-                HumanMessagePromptTemplate.from_template("{question}"),
+                #                MessagesPlaceholder(variable_name="chat_history"),
+                HumanMessagePromptTemplate.from_template(self.general_user_template),
             ]
         )
 

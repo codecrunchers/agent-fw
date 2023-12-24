@@ -16,7 +16,10 @@ async def upload(file: bytes = File(...)):
 @app.get("/analyse/{query}")
 async def analyse(request: Request, query):
     _prompt = prompt.generate()
-    vstore = vectorstore.load("key")
+    try:
+        vstore = vectorstore.load("key")
+    except:
+        return {"summary": "Please upload a doument, drag it onto me"}
     chat = ConversationalRetrievalChain.from_llm(
         langchain_llm,
         vstore.as_retriever(),

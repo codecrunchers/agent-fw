@@ -27,13 +27,13 @@ Witness RAGI's capabilities through our prototype chat agent that utilizes the f
 RAGI is designed to free engineers to focus on delivering customer value, enriched by a suite of sophisticated AI tools:
 
 - **Extensible Hooks**: Our use of LangChain from the outset means quick starts and a standardized approach to model deployment and tooling integration. These hooks enable growth and new feature integration as requirements evolve.
+- **SQL Worker**: Adds database-driven context to searches.
 - **Chat History**: Maintains conversation context for coherent and pertinent dialogue.
 - **Vector Store for Document Vectors**: A repository for document vectors to support advanced semantic search and clustering.
 - **Document Handler**: Processes documents in real-time, extracting vital information from diverse text sources.
 - **LLM Wrapper**: A versatile wrapper for various LLMs, broadening the scope of applications and customization.
 - **Config Module**: Manages transitions between development and production settings smoothly.
 - **Prompt Explorer**: Enhances prompt crafting for effective LLM interaction.
-- **SQL Worker**: Adds database-driven context to searches.
 - **WandB Integration and Feedback Loop**: Inclusion of WandB provides a feedback loop for model tracing and deployment insights.
 
 [View WandB Model Deployments / Interactions](https://wandb.ai/a-sh0ts/langchain_callback_demo/reports/Prompt-Engineering-LLMs-with-LangChain-and-W-B--VmlldzozNjk1NTUw)

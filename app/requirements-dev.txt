@@ -1,0 +1,5 @@
+faiss-gpu
+faiss-cpu
+tiktoken
+ipytesseract
+tesseract

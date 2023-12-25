@@ -1,7 +1,7 @@
 # RAGI (Retrieval-Augmented Generation Inscribe)
 
 
-![RAGI Logo](attachment:docs/ragi.png)
+![RAGI Logo](./docs/ragi_250.png)
 
 ## Introduction
 

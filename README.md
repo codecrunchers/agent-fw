@@ -52,7 +52,7 @@ Version 0.1 is a proof of concept. Data persistence is currently in-memory or di
 
 ## Getting Started
 
-- **Prerequisites**: Docker and Python knowledge.
+- **Prerequisites**: Docker and Python knowledge, some sqllite tooling
 - **Installation Guide**: Comprehensive setup steps for a hassle-free installation.
 - **Basic Usage**: Get up and running with examples for bot interactions and document processing.
 

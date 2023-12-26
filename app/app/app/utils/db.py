@@ -28,7 +28,9 @@ class LocalDatabase(AbstractDatabase):
     def connect(self) -> None:
         db = SQLDatabase.from_uri(config["db_uri"])
         llm = OpenAI(temperature=0, verbose=True)
-        self.db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
-
+        try:
+            self.db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
+        except Exception as e:
+            print(f"!!!!!!!!!!!       {e}     !!!!!!!!!!!")
     async def query(self, query: str):
         return self.db_chain.run(query)

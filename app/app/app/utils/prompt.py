@@ -22,6 +22,7 @@ class AbstractPrompt(ABC):
         pass
 
 
+
 class StringPrompt(AbstractPrompt):
     template = """You are a document fraud expert reasoning about the legitimacy of a document and the owner having conversation with a fraud analyst. \
             ---- \

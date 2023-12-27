@@ -1,18 +1,27 @@
 body {
     font-family: Avenir, Helvetica, Arial, sans-serif;
 }
+.hero.is-success .title {
+  color: #ADD8E6;
+}
+
 form {
     margin-top: 12px;
+
 }#chat-messages li {
     padding: 12px;
 }
 .upload-area {
-    border: 2px dashed #fdf374;
+    border: 2px dashed #ADD8E6;
     padding: 20px;
     text-align: center;
     margin: 10px;
 }
 
+.hero-body {
+    background-color: #fdf374
+}
+
 .container {
-    color:#fdf374;
+    color: #ADD8E6;
 }

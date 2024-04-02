@@ -1,4 +1,4 @@
-# RAGI (Retrieval-Augmented Generation Inscribe)
+## RAG
 
 
 ![RAGI Logo](./docs/ragi_250.png)
@@ -13,7 +13,7 @@ RAGI is not just about processing information—it's about creating a system tha
 
 ## Demo
 
-Witness RAGI's capabilities through our prototype chat agent that utilizes the framework to:
+Witness RAG's capabilities through our prototype chat agent that utilizes the framework to:
 - Accept and parse documents.
 - Persist document data into FAISS Vector DB.
 - Generate specialized prompts for risk analysis.
@@ -34,13 +34,7 @@ RAGI is designed to free engineers to focus on delivering customer value, enrich
 - **LLM Wrapper**: A versatile wrapper for various LLMs, broadening the scope of applications and customization.
 - **Config Module**: Manages transitions between development and production settings smoothly.
 - **Prompt Explorer**: Enhances prompt crafting for effective LLM interaction.
-- **WandB Integration and Feedback Loop**: Inclusion of WandB provides a feedback loop for model tracing and deployment insights.
 
-[View WandB Model Deployments / Interactions](https://wandb.ai/a-sh0ts/langchain_callback_demo/reports/Prompt-Engineering-LLMs-with-LangChain-and-W-B--VmlldzozNjk1NTUw)
-
-## Status 
-
-Version 0.1 is a proof of concept. Data persistence is currently in-memory or disk-serialized, with easy migration paths to more persistent structures.
 
 ## Deployment
 
@@ -68,4 +62,3 @@ Your contributions and feedback are invaluable. We've outlined guidelines to ens
 
 ---
 
-This refined version adds clarity and professionalism to the documentation. It includes placeholders for links to external resources like video demos and usage examples, which should be replaced with actual URLs once available. The language has been polished to be more engaging and the structure slightly modified for better readability.
